@@ -33,6 +33,7 @@ public final class Config {
   public static boolean forceRegisterAll = false; // enables all common items, even if their module is not present
 
   // Tools and general
+  public static boolean invulnerableTools = true;
   public static boolean spawnWithBook = true;
   public static boolean reuseStencil = true;
   public static boolean craftCastableMaterials = false;
@@ -129,6 +130,11 @@ public final class Config {
       String cat = "gameplay";
       List<String> propOrder = Lists.newArrayList();
       Gameplay = configFile.getCategory(cat);
+
+      prop = configFile.get(cat, "invulnerableTools", invulnerableTools);
+      prop.setComment("Tools and weapons cannot be destroyed unless they fall out of the world");
+      invulnerableTools = prop.getBoolean();
+      propOrder.add(prop.getName());
 
       prop = configFile.get(cat, "spawnWithBook", spawnWithBook);
       prop.setComment("Players who enter the world for the first time get a Tinkers' Book");
